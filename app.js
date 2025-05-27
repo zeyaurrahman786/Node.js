@@ -4,7 +4,7 @@ const path = require("path");
 const os = require("os");
 const url = require("url");
 const crypto = require("crypto");
-const syaHello = require("./greetings");
+const syaHello = require("./greeting");
 const math = require("./math");
 const lodash = require("lodash");
 
