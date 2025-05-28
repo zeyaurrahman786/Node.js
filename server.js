@@ -44,14 +44,34 @@ const url = require('url');
 
 // Query Parameters
 
+// const server = http.createServer((req, res) => {
+//     if(req.method === "GET" && req.url.startsWith("/search")){
+//         const queryObject = url.parse(req.url, true).query;
+//         res.writeHead(200, {'Content-Type': 'application/json'});
+//         res.end(JSON.stringify({message: "Query received", query: queryObject}));
+//     } else {
+//         res.writeHead(404, {'Content-Type': 'text/plain'});
+//         res.end('Route Not Found'); // Handle other routes~
+//     }
+// });
+
+
+
+
+
+
+// Response Headers
+
 const server = http.createServer((req, res) => {
-    if(req.method === "GET" && req.url.startsWith("/search")){
-        const queryObject = url.parse(req.url, true).query;
-        res.writeHead(200, {'Content-Type': 'application/json'});
-        res.end(JSON.stringify({message: "Query received", query: queryObject}));
+    if(req.method === "GET" && req.url.startsWith("/")){
+        res.writeHead(200, {'Content-Type': 'application/json',
+            'Custom-Header': 'Node Js Server',
+            'Custom-Tracking-ID': '12345'
+        });
+        res.end("Welcome to the Custom Header Page!");
     } else {
         res.writeHead(404, {'Content-Type': 'text/plain'});
-        res.end('Route Not Found'); // Handle other routes~
+        res.end('Page Not Found'); // Handle other routes~
     }
 });
 
