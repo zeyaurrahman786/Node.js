@@ -1,6 +1,7 @@
 // Handling HTTP Requests and Responses
 
 const http = require('http');
+const url = require('url');
 
 
 // GET Request
@@ -20,21 +21,41 @@ const http = require('http');
 
 // POST Request
 
+// const server = http.createServer((req, res) => {
+//     if(req.method === 'POST' && req.url === '/submit'){
+//         let body = '';
+//         req.on('data', chunk => {
+//             body += chunk.toString(); // Convert Buffer to string
+//         });
+//         req.on('end', () => {
+//             res.writeHead(200, {'Content-Type': 'application/json'});
+//             res.end(JSON.stringify({message: "Data Received", data: body})); // Respond with the received data
+//         });
+//     }else {
+//         res.writeHead(404, {'Content-Type': 'text/plain'});
+//         res.end('Data Not Found'); // Handle other routes
+//     }
+// });
+
+
+
+
+
+
+// Query Parameters
+
 const server = http.createServer((req, res) => {
-    if(req.method === 'POST' && req.url === '/submit'){
-        let body = '';
-        req.on('data', chunk => {
-            body += chunk.toString(); // Convert Buffer to string
-        });
-        req.on('end', () => {
-            res.writeHead(200, {'Content-Type': 'application/json'});
-            res.end(JSON.stringify({message: "Data Received", data: body})); // Respond with the received data
-        });
-    }else {
+    if(req.method === "GET" && req.url.startsWith("/search")){
+        const queryObject = url.parse(req.url, true).query;
+        res.writeHead(200, {'Content-Type': 'application/json'});
+        res.end(JSON.stringify({message: "Query received", query: queryObject}));
+    } else {
         res.writeHead(404, {'Content-Type': 'text/plain'});
-        res.end('Data Not Found'); // Handle other routes
+        res.end('Route Not Found'); // Handle other routes~
     }
 });
+
+
 
 const PORT = 3060;
 
