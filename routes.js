@@ -47,7 +47,7 @@ const url = require("url");
 
 
 
-// Handling Dynamic Routes
+// Handling Dynamic Routes(website.com/products/items1)
 
 const server = http.createServer((req, res) => {
     const { pathname } = url.parse(req.url);
