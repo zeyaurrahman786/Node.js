@@ -52,7 +52,7 @@ const url = require("url");
 const server = http.createServer((req, res) => {
     const { pathname } = url.parse(req.url);
     if(pathname.startsWith('/products/')){
-        const items = pathname.split('/')[2];  '/products/item1'
+        const items = pathname.split('/')[2];
         res.writeHead(200, {'Content-Type': 'text/plain'});
         res.end(`Welcome to the Products Page! You are viewing: ${items}`);
     } else {
