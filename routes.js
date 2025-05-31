@@ -49,17 +49,49 @@ const url = require("url");
 
 // Handling Dynamic Routes(website.com/products/items1)
 
-const server = http.createServer((req, res) => {
-    const { pathname } = url.parse(req.url);
-    if(pathname.startsWith('/products/')){
-        const items = pathname.split('/')[2];
-        res.writeHead(200, {'Content-Type': 'text/plain'});
-        res.end(`Welcome to the Products Page! You are viewing: ${items}`);
-    } else {
-        res.writeHead(404, {'Content-Type': 'text/plain'});
-        res.end("Page Not Found");
-    }
-})
+// const server = http.createServer((req, res) => {
+//     const { pathname } = url.parse(req.url);
+//     if(pathname.startsWith('/products/')){
+//         const items = pathname.split('/')[2];
+//         res.writeHead(200, {'Content-Type': 'text/plain'});
+//         res.end(`Welcome to the Products Page! You are viewing: ${items}`);
+//     } else {
+//         res.writeHead(404, {'Content-Type': 'text/plain'});
+//         res.end("Page Not Found");
+//     }
+// })
+
+
+
+
+
+
+
+// Middleware Function for Logging Requests
+
+const requestLogger = (req, res, next) => {
+    console.log(`${req.method} request for '${req.url}'`);
+    next(req, res);
+}
+
+
+// Creating the Server with Middleware
+
+// const server = http.createServer((req, res) => {
+//     requestLogger(req, res, () => {
+//         const { pathname } = url.parse(req.url);
+//     if(pathname.startsWith('/user/')) {
+//         const userId = pathname.split('/')[2];
+//         res.writeHead(200, { "Content-Type": "text/plain" });
+//         res.end(`User Id: ${userId}`);
+//     } else {
+//         res.writeHead(404, { "Content-Type": "text/plain" });
+//         res.end("Page Not Found");
+//     }
+//     });
+// });
+
+
 
 
 
