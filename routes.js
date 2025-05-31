@@ -2,6 +2,7 @@
 
 const http = require("http");
 const url = require("url");
+const queryString = require("querystring");
 
 
 
@@ -69,10 +70,10 @@ const url = require("url");
 
 // Middleware Function for Logging Requests
 
-const requestLogger = (req, res, next) => {
-    console.log(`${req.method} request for '${req.url}'`);
-    next(req, res);
-}
+// const requestLogger = (req, res, next) => {
+//     console.log(`${req.method} request for '${req.url}'`);
+//     next(req, res);
+// }
 
 
 // Creating the Server with Middleware
@@ -93,6 +94,30 @@ const requestLogger = (req, res, next) => {
 
 
 
+
+
+
+
+// Handling URL-encoded Data (Form Submission)
+
+const server = http.createServer((req, res) => {
+    if(req.method === 'POST' && req.url === '/submit') {
+        let data = '';
+
+        req.on('data', chunk => {
+            data += chunk;
+        });
+
+        req.on('end', () => {
+            const parsedData = queryString.parse(data);
+            res.writeHead(200, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({message: "Form submitted successfully!", parsedData}));
+        });
+    } else {
+        res.writeHead(404, { "Content-Type": "text/plain" });
+        res.end("Page Not Found");
+    }
+});
 
 
 
