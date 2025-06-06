@@ -317,3 +317,92 @@ const lodash = require("lodash");
 // });
 
 // console.log("Watching for changes in the current directory...");
+
+
+
+
+
+
+
+
+
+
+// Understanding the Event Emitters
+
+// Adding an Event Listener
+
+const EventEmitter = require('events');
+
+const emitter = new EventEmitter();
+
+
+
+// emitter.on("test1", () => {
+//     console.log("Event test1 triggered!");
+// })
+
+// emitter.emit("test1");
+
+
+
+
+
+
+
+// Adding Multiple Event Listeners
+
+// emitter.on("test1", () => {
+//     console.log("Event test1 triggered! - Listener 1");
+// })
+
+// emitter.on("test1", () => {
+//     console.log("Event test2 triggered! - Listener 1");
+// })
+
+// emitter.on("test1", () => {
+//     console.log("Event test3 triggered! - Listener 1");
+// })
+
+// emitter.emit("test1");
+
+
+
+
+
+
+
+// Removing an Event Listener
+
+// emitter.on("test1", () => {
+//     console.log("Event test1 triggered! - Listener 1");
+// });
+
+// emitter.emit("test1");
+// emitter.removeListener("test1");
+// emitter.emit("test1");
+
+
+
+
+
+
+
+// Error Handling in Events
+
+emitter.on("test1", () => {
+    console.log("Event test1 triggered!");
+});
+
+emitter.on("error", (error) => {
+    console.error("An error occurred:", error.message);
+})
+
+
+try {
+    emitter.emit("test1");
+    emitter.removeListener("test1");
+    emitter.emit("test1");
+} 
+catch (error) {
+    emitter.emit("error", error);
+}
