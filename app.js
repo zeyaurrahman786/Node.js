@@ -389,20 +389,20 @@ const emitter = new EventEmitter();
 
 // Error Handling in Events
 
-emitter.on("test1", () => {
-    console.log("Event test1 triggered!");
-});
+// emitter.on("test1", () => {
+//     console.log("Event test1 triggered!");
+// });
 
-emitter.on("error", (error) => {
-    console.error("An error occurred:", error.message);
-})
+// emitter.on("error", (error) => {
+//     console.error("An error occurred:", error.message);
+// })
 
 
-try {
-    emitter.emit("test1");
-    emitter.removeListener("test1");
-    emitter.emit("test1");
-} 
-catch (error) {
-    emitter.emit("error", error);
-}
+// try {
+//     emitter.emit("test1");
+//     emitter.removeListener("test1");
+//     emitter.emit("test1");
+// } 
+// catch (error) {
+//     emitter.emit("error", error);
+// }
